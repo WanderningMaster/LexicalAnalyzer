@@ -12,6 +12,6 @@ const std::string menu[] = {
 };
 
 
-bool showMenu();
-void openCalculator();
+bool showMenu(std::string ENV_MODE);
+void openCalculator(std::string ENV_MODE);
 void openConverter();

@@ -1,7 +1,7 @@
 #include <iostream>
 #include "menu.h"
 
-bool showMenu(){
+bool showMenu(std::string ENV_MODE){
     bool flag = true;
     for(int i = 0; i<3; i++){
         std::cout<<i+1<<". "<<menu[i]<<std::endl;
@@ -17,7 +17,7 @@ bool showMenu(){
         case 1:{
             getchar();
             system("clear");
-            openCalculator();
+            openCalculator(ENV_MODE);
             system("clear");
 
             break;
@@ -42,7 +42,7 @@ bool showMenu(){
 
     return flag;
 }
-void openCalculator(){
+void openCalculator(std::string ENV_MODE){
     std::string help = "lsfn\t\t- see all commands\nquit\t\t- exits the calculator\n";
     std::string lsfn = "sin\ncos\ntg\nctg\nsec\ncosec\n";
 
@@ -63,8 +63,11 @@ void openCalculator(){
         }
         try{
             std::vector<Lexeme> lexemes = lexemeAnalyze(expr);
-            for(auto lexeme: lexemes){
-                std::cout<<"{ Type: "<<lexeme.type<<" Value: "<<lexeme.value<<"}\n";
+            
+            if(ENV_MODE == "debug") {
+                for(auto lexeme: lexemes){
+                    std::cout<<"{ Type: "<<lexeme.type<<" Value: "<<lexeme.value<<"}\n";
+                }
             }
             int pos = 0;
             std::cout<<expression(lexemes, pos)<<std::endl;
